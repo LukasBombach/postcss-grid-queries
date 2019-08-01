@@ -9,10 +9,8 @@ function run (input, output, opts) {
   })
 }
 
-/* Write tests here
 
 it('does something', function () {
-  return run('a{ }', 'a{ }', { })
+  // return run('a{ }', 'a{ }', { })
 })
 
-*/
