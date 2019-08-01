@@ -1,16 +1,15 @@
-var postcss = require('postcss')
+var postcss = require("postcss");
 
-var plugin = require('./')
+var plugin = require("./");
 
-function run (input, output, opts) {
-  return postcss([plugin(opts)]).process(input).then(function (result) {
-    expect(result.css).toEqual(output)
-    expect(result.warnings()).toHaveLength(0)
-  })
+async function run(input, output, opts = {}) {
+  const result = postcss([plugin(opts)]).process(input);
+  expect(result.css).toEqual(output);
+  expect(result.warnings()).toHaveLength(0);
 }
 
-
-it('does something', function () {
-  // return run('a{ }', 'a{ }', { })
-})
-
+it("does nothing to normal media queries", async () => {
+  const input = "@media only screen and (min-width: 600px) {}";
+  const output = "@media only screen and (min-width: 600px) {}";
+  await run(input, output);
+});

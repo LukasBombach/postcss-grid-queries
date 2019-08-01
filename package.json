@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "test": "jest && eslint *.js",
-    "dev": "jest -o"
+    "dev": "jest --watch"
   },
   "author": "Lukas Bombach <lukas.bombach@googlemail.com>",
   "license": "MIT",
