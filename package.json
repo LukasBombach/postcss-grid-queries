@@ -10,8 +10,8 @@
     "grid-queries"
   ],
   "scripts": {
-    "test": "jest && eslint *.js",
-    "dev": "jest --watch"
+    "test": "jest",
+    "linkt": "eslint *.js"
   },
   "author": "Lukas Bombach <lukas.bombach@googlemail.com>",
   "license": "MIT",
@@ -21,8 +21,7 @@
   },
   "homepage": "https://github.com/LukasBombach/postcss-grid-queries",
   "dependencies": {
-    "postcss": "7.0.17",
-    "postcss-media-query-parser": "0.2.3"
+    "postcss": "7.0.17"
   },
   "devDependencies": {
     "@logux/eslint-config": "30.0.1",

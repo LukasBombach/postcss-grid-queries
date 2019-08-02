@@ -1,14 +1,29 @@
-var postcss = require('postcss')
-//var mediaParser = require ("postcss-media-query-parser");
+const postcss = require("postcss");
+const { inspect } = require("util");
 
-module.exports = postcss.plugin('postcss-grid-queries', function (opts) {
-  opts = opts || {}
+module.exports = postcss.plugin("postcss-grid-queries", (grid = {}) => {
+  return (root, result) => {
+    root.walkAtRules(rule => {
+      const minColWidthMatch = rule.params.match(
+        /-min-col-width.*?:.*?(\d+)(\w+)/i
+      );
+      const colSpanMatch = rule.params.match(/-col-span.*?:.*?(\d+)/i);
 
-  return function (root, result) {
+      if (minColWidthMatch === null) return;
+      if (colSpanMatch === null) return;
 
-    /* root.walkAtRules(rule => {
-      console.log(rule);
-    }) */
+      const minColWidth = parseInt(minColWidthMatch[1], 10);
+      const minColWidthUnit = minColWidthMatch[2];
+      const colSpan = parseInt(colSpanMatch[1], 10);
 
-  }
-})
+      const containerRatio = colSpan / grid.cols;
+      const minWidth = minColWidth / containerRatio;
+
+      rule.params = rule.params.replace(/ and \([^\(]*?-col-span.*?\)/i, "");
+      rule.params = rule.params.replace(
+        /\(.*?-min-col-width.*?\)/i,
+        `(min-width: ${minWidth}${minColWidthUnit})`
+      );
+    });
+  };
+});

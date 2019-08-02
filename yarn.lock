@@ -3176,11 +3176,6 @@ posix-character-classes@^0.1.0:
   resolved "https://spring.jfrog.io/spring/api/npm/npm-red/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
   integrity sha1-AerA/jta9xoqbAL+q7jB/vfgDqs=
 
-postcss-media-query-parser@0.2.3:
-  version "0.2.3"
-  resolved "https://spring.jfrog.io/spring/api/npm/npm-red/postcss-media-query-parser/-/postcss-media-query-parser-0.2.3.tgz#27b39c6f4d94f81b1a73b8f76351c609e5cef244"
-  integrity sha1-J7Ocb02U+Bsac7j3Y1HGCeXO8kQ=
-
 postcss@7.0.17:
   version "7.0.17"
   resolved "https://spring.jfrog.io/spring/api/npm/npm-red/postcss/-/postcss-7.0.17.tgz#4da1bdff5322d4a0acaab4d87f3e782436bad31f"
