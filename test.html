@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title of the document</title>
+    <style>
+      html,
+      body {
+        width: 100vw;
+        min-height: 100vh;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        height: 100vh;
+        width: 100vw;
+        justify-items: stretch;
+        align-items: stretch;
+        max-width: 800px;
+      }
+      .box {
+        /* border: 1px dotted #fff; */
+        grid-column: span var(--span);
+        font-family: monospace;
+        white-space: pre;
+        box-sizing: border-box;
+      }
+      .box.purple {
+        background-color: rebeccapurple;
+      }
+      .box.burly {
+        background-color: burlywood;
+      }
+      .box.blue {
+        background-color: cadetblue;
+      }
+
+      .full-width-content::before {
+        content: "CSS No Query";
+        display: block;
+      }
+
+      /* 200px * 3 <= container width (800) */
+      @media (min-width: calc(200px * 3)) {
+        .full-width-content::before {
+          content: "CSS Container: 200px, CSS Browser: 600px";
+          display: block;
+        }
+      }
+
+      /* 250px * 3 <= container width (800) */
+      @media (min-width: calc(250px * 3)) {
+        .full-width-content::before {
+          content: "CSS Container: 250px, CSS Browser: 750px";
+          display: block;
+        }
+      }
+
+      /* 400px * 3 > container width (800) so we add max width or we could remove it entirely */
+      @media (min-width: calc(400px * 3)) and (max-width: 800px) {
+        .full-width-content::before {
+          content: "CSS Container: 400px, CSS Browser: 1200px";
+          display: block;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="grid">
+      <div class="box burly" style="--span: 4">
+        <div class="full-width-content"></div>
+      </div>
+      <div class="box purple" style="--span: 4"></div>
+      <div class="box blue" style="--span: 4"></div>
+
+      <div class="box burly" style="--span: 4"></div>
+      <div class="box purple" style="--span: 4"></div>
+      <div class="box blue" style="--span: 4"></div>
+
+      <div class="box burly" style="--span: 4"></div>
+      <div class="box purple" style="--span: 4"></div>
+      <div class="box blue" style="--span: 4"></div>
+    </div>
+
+    <script>
+      const content = document.querySelector(".full-width-content");
+      setText();
+      window.addEventListener("resize", setText);
+
+      function setText() {
+        const containerSize = Math.floor(content.getBoundingClientRect().width);
+        const windowSize = Math.floor(document.body.offsetWidth);
+        content.textContent = `JS  Container: ${containerSize}px, JS  Browser: ${windowSize}px`;
+      }
+    </script>
+  </body>
+</html>
