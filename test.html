@@ -20,9 +20,9 @@
         justify-items: stretch;
         align-items: stretch;
         max-width: 800px;
+        margin: 0 auto;
       }
       .box {
-        /* border: 1px dotted #fff; */
         grid-column: span var(--span);
         font-family: monospace;
         white-space: pre;
@@ -38,32 +38,31 @@
         background-color: cadetblue;
       }
 
-      .full-width-content::before {
+      .content-element::before {
         content: "CSS No Query";
         display: block;
       }
 
       /* 200px * 3 <= container width (800) */
       @media (min-width: calc(200px * 3)) {
-        .full-width-content::before {
-          content: "CSS Container: 200px, CSS Browser: 600px";
-          display: block;
+        .content-element::before {
+          content: "CSS Container: 200px";
+          color: blue;
         }
       }
 
       /* 250px * 3 <= container width (800) */
       @media (min-width: calc(250px * 3)) {
-        .full-width-content::before {
-          content: "CSS Container: 250px, CSS Browser: 750px";
-          display: block;
+        .content-element::before {
+          content: "CSS Container: 250px";
+          color: green;
         }
       }
 
       /* 400px * 3 > container width (800) so we add max width or we could remove it entirely */
       @media (min-width: calc(400px * 3)) and (max-width: 800px) {
-        .full-width-content::before {
-          content: "CSS Container: 400px, CSS Browser: 1200px";
-          display: block;
+        .content-element::before {
+          content: "CSS Container: 400px";
         }
       }
     </style>
@@ -72,7 +71,7 @@
   <body>
     <div class="grid">
       <div class="box burly" style="--span: 4">
-        <div class="full-width-content"></div>
+        <div class="content-element"></div>
       </div>
       <div class="box purple" style="--span: 4"></div>
       <div class="box blue" style="--span: 4"></div>
@@ -87,14 +86,14 @@
     </div>
 
     <script>
-      const content = document.querySelector(".full-width-content");
+      const content = document.querySelector(".content-element");
       setText();
       window.addEventListener("resize", setText);
 
       function setText() {
         const containerSize = Math.floor(content.getBoundingClientRect().width);
         const windowSize = Math.floor(document.body.offsetWidth);
-        content.textContent = `JS  Container: ${containerSize}px, JS  Browser: ${windowSize}px`;
+        content.textContent = `JS  Container: ${containerSize}px`;
       }
     </script>
   </body>
